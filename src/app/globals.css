@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f7fb;
-  --foreground: #172033;
+  --background: #f0fdf4;
+  --foreground: #0f172a;
   --card: #ffffff;
-  --muted: #6b7489;
-  --border: #e3e6ef;
-  --primary: #4f46e5;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --primary: #059669;
   --primary-fg: #ffffff;
-  --soft: #eef0fb;
+  --soft: #ecfdf5;
 }
 
 :root[data-theme="dark"] {
-  --background: #0e1220;
-  --foreground: #e7eaf3;
-  --card: #171c2e;
-  --muted: #98a2bc;
-  --border: #283049;
-  --primary: #7c78ff;
-  --primary-fg: #0e1220;
-  --soft: #1f2640;
+  --background: #0a1f16;
+  --foreground: #ecfdf5;
+  --card: #0f2a1f;
+  --muted: #86a8a0;
+  --border: #1a3d2e;
+  --primary: #10b981;
+  --primary-fg: #022c22;
+  --soft: #143d2c;
 }
 
 @theme inline {
@@ -44,3 +44,19 @@ body {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 .spin { animation: spin 0.8s linear infinite; }
+
+
+/* Mobile-friendly base */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+/* Prevent iOS zoom on inputs (16px+) already handled in login; keep selects readable */
+@media (max-width: 640px) {
+  input, select, textarea {
+    font-size: 16px;
+  }
+}

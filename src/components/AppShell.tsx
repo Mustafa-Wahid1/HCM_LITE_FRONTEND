@@ -115,15 +115,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const sidebar = (
     <nav className="flex h-full flex-col gap-1 p-3" aria-label="Main">
-      <div className="mb-3 flex items-center gap-2 px-2 py-1">
-        <span className="rounded-lg bg-primary p-1.5 text-primary-fg"><Users className="h-4 w-4" /></span>
+      <div className="mb-3 flex items-center gap-2.5 px-2 py-1">
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-fg">
+          <Users className="h-4 w-4" />
+        </span>
         <div className="min-w-0">
-          <div className="text-sm font-semibold leading-tight">HCM Lite</div>
+          <div className="text-sm font-bold leading-tight tracking-tight text-primary">HRFlow</div>
           <div className="truncate text-xs text-muted">{user.company_name}</div>
         </div>
       </div>
       {items.map((i) => (
-        <Link key={i.href} href={i.href} className={cx("flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition", active === i.href ? "bg-primary text-primary-fg" : "hover:bg-soft")}>
+        <Link key={i.href} href={i.href} className={cx("flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition active:scale-[0.98]", active === i.href ? "bg-primary text-primary-fg" : "hover:bg-soft")}>
           <i.icon className="h-4 w-4 shrink-0" /> {i.label}
         </Link>
       ))}
@@ -135,28 +137,45 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <aside className="sticky top-0 hidden h-screen overflow-y-auto border-r bg-card lg:block">{sidebar}</aside>
       {menu && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setMenu(false)} />
-          <aside className="absolute inset-y-0 left-0 w-64 overflow-y-auto bg-card shadow-xl">
-            <button onClick={() => setMenu(false)} className="absolute right-2 top-2 rounded p-1 hover:bg-soft" aria-label="Close menu"><X className="h-4 w-4" /></button>
-            {sidebar}
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" onClick={() => setMenu(false)} />
+          <aside className="absolute inset-y-0 left-0 flex w-[min(18rem,85vw)] flex-col overflow-y-auto bg-card shadow-2xl">
+            <div className="flex items-center justify-between border-b px-3 py-2.5">
+              <span className="text-sm font-bold text-primary">Menu</span>
+              <button onClick={() => setMenu(false)} className="rounded-lg p-2 hover:bg-soft" aria-label="Close menu">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto">{sidebar}</div>
           </aside>
         </div>
       )}
       <div className="min-w-0">
-        <header className="sticky top-0 z-20 flex items-center justify-between border-b bg-background/90 px-4 py-2.5 backdrop-blur">
-          <button onClick={() => setMenu(true)} className="rounded-lg p-2 hover:bg-soft lg:hidden" aria-label="Open menu"><Menu className="h-5 w-5" /></button>
-          <div className="hidden text-sm text-muted lg:block">{new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</div>
-          <div className="flex items-center gap-1">
-            <button onClick={toggleTheme} className="rounded-lg p-2 hover:bg-soft" aria-label="Toggle dark mode">{dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}</button>
+        <header className="sticky top-0 z-20 flex items-center justify-between gap-2 border-b bg-background/95 px-3 py-2.5 backdrop-blur supports-[backdrop-filter]:bg-background/80 sm:px-4">
+          <div className="flex min-w-0 items-center gap-1">
+            <button onClick={() => setMenu(true)} className="rounded-xl p-2.5 hover:bg-soft lg:hidden" aria-label="Open menu">
+              <Menu className="h-5 w-5" />
+            </button>
+            <div className="hidden text-sm text-muted lg:block">
+              {new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+            </div>
+            {/* Mobile brand hint */}
+            <span className="truncate text-sm font-bold text-primary lg:hidden">HRFlow</span>
+          </div>
+          <div className="flex shrink-0 items-center gap-0.5 sm:gap-1">
+            <button onClick={toggleTheme} className="rounded-xl p-2.5 hover:bg-soft" aria-label="Toggle dark mode">
+              {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
             <Notifications />
-            <div className="mx-2 hidden text-right leading-tight sm:block">
+            <div className="mx-1 hidden text-right leading-tight sm:mx-2 sm:block">
               <div className="text-sm font-medium">{user.name}</div>
               <div className="text-xs capitalize text-muted">{user.role}</div>
             </div>
-            <button onClick={() => { logout(); router.replace("/login"); }} className="rounded-lg p-2 hover:bg-soft" aria-label="Sign out" title="Sign out"><LogOut className="h-5 w-5" /></button>
+            <button onClick={() => { logout(); router.replace("/login"); }} className="rounded-xl p-2.5 hover:bg-soft" aria-label="Sign out" title="Sign out">
+              <LogOut className="h-5 w-5" />
+            </button>
           </div>
         </header>
-        <main className="mx-auto max-w-7xl p-4 sm:p-6">{children}</main>
+        <main className="mx-auto max-w-7xl p-3 pb-8 sm:p-6">{children}</main>
       </div>
       <AIChat />
     </div>

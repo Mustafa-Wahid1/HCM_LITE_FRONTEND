@@ -7,8 +7,8 @@ import { ToastProvider } from "@/components/ui";
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "HCM Lite",
-  description: "AI-assisted Human Capital Management for Admin, HR and Employees",
+  title: "HRFlow",
+  description: "Modern HR & workforce management platform",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

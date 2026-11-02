@@ -39,7 +39,7 @@ export function Empty({ title, hint, action }: { title: string; hint?: string; a
 
 export function Card({ title, actions, children, className, pad = true }: { title?: React.ReactNode; actions?: React.ReactNode; children: React.ReactNode; className?: string; pad?: boolean }) {
   return (
-    <section className={cx("rounded-xl border bg-card shadow-sm", className)}>
+    <section className={cx("rounded-2xl border bg-card shadow-sm", className)}>
       {(title || actions) && (
         <header className="flex flex-wrap items-center justify-between gap-2 border-b px-4 py-3">
           <h2 className="text-sm font-semibold">{title}</h2>
@@ -75,7 +75,7 @@ export function Button({ variant = "primary", size = "md", loading, className, c
     <button
       {...rest}
       disabled={disabled || loading}
-      className={cx("inline-flex items-center justify-center gap-2 rounded-lg font-medium transition disabled:cursor-not-allowed disabled:opacity-50", size === "sm" ? "px-2.5 py-1.5 text-xs" : "px-3.5 py-2 text-sm", styles, className)}
+      className={cx("inline-flex items-center justify-center gap-2 rounded-xl font-medium transition disabled:cursor-not-allowed disabled:opacity-50", size === "sm" ? "px-2.5 py-1.5 text-xs" : "px-3.5 py-2 text-sm", styles, className)}
     >
       {loading && <Spinner />}
       {children}
@@ -83,7 +83,7 @@ export function Button({ variant = "primary", size = "md", loading, className, c
   );
 }
 
-const inputCls = "w-full rounded-lg border bg-card px-3 py-2 text-sm outline-none transition placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:opacity-60";
+const inputCls = "w-full rounded-xl border bg-card px-3 py-2.5 text-sm outline-none transition placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:opacity-60";
 
 export function Field({ label, hint, error, children }: { label: string; hint?: string; error?: string; children: React.ReactNode }) {
   return (
@@ -138,8 +138,8 @@ export function Modal({ open, title, onClose, children, wide }: { open: boolean;
   }, [open, onClose]);
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-0 sm:items-center sm:p-4" onMouseDown={onClose}>
-      <div role="dialog" aria-modal="true" aria-label={title} onMouseDown={(e) => e.stopPropagation()}
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-0 sm:items-center sm:p-4" onClick={onClose}>
+      <div role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.stopPropagation()}
         className={cx("max-h-[90vh] w-full overflow-auto rounded-t-2xl border bg-card shadow-xl sm:rounded-2xl", wide ? "sm:max-w-2xl" : "sm:max-w-md")}>
         <div className="sticky top-0 flex items-center justify-between border-b bg-card px-4 py-3">
           <h3 className="font-semibold">{title}</h3>
